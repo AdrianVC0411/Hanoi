@@ -1,0 +1,28 @@
+#include <ESP8266WiFi.h>
+
+const char* ssid = "TU_NOMBRE_DE_RED_WIFI"; // Reemplaza con el nombre de tu red WiFi
+const char* password = "TU_CONTRASEÑA_DE_WIFI"; // Reemplaza con tu contraseña de WiFi
+
+void setup() {
+  Serial.begin(115200);
+
+  // Configura el modo de funcionamiento del ESP8266 como estación
+  WiFi.mode(WIFI_STA);
+
+  // Intenta conectarse a la red WiFi
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("¡Conectado a WiFi!");
+  Serial.println("Dirección IP:");
+  Serial.println(WiFi.localIP());
+}
+
+void loop() {
+  // Aquí puedes agregar tu código para hacer cosas una vez que estés conectado a WiFi
+}

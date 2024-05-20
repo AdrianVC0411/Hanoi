@@ -1,0 +1,29 @@
+#include <SoftwareSerial.h>
+
+// Pines para la comunicación con el módulo HC-05
+#define RX_PIN 10
+#define TX_PIN 11
+
+// Objeto para la comunicación serial con el módulo HC-05
+SoftwareSerial bluetoothSerial(RX_PIN, TX_PIN);
+
+void setup() {
+  // Inicializa la comunicación serial con el módulo HC-05 a 9600 bps
+  bluetoothSerial.begin(9600);
+
+  // Imprime un mensaje de bienvenida en el monitor serie
+  Serial.begin(9600);
+  Serial.println("¡Arduino listo para comunicación Bluetooth!");
+}
+
+void loop() {
+  // Si hay datos disponibles para leer del módulo Bluetooth, los lee y los imprime en el monitor serie
+  if (bluetoothSerial.available()) {
+    char data = bluetoothSerial.read();
+    Serial.print(data);
+  }
+
+  // Envía un mensaje de prueba al módulo Bluetooth cada 1 segundo
+  bluetoothSerial.println("Hola desde Arduino!");
+  delay(1000);
+}
